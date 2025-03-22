@@ -9,7 +9,7 @@ Process Mozilla's version numbers. Support main products like Firefox desktop, F
 
 Mozilla's build and release pipelines deal with version numbers. This has naturally grown into many scripts living at various places. Most of them reimplemented the same logic that determined whether a version was of which type. In theory, it's a simple problem that could (and was) solved with a regular expression. Although, as a human group, Mozilla hasn't been 100% consistent in giving version numbers to its products. Thus, the regular expression had to grow and we had to update each place that dealt with such exceptions.
 
-Hence, `mozilla-version` is an attempt to become the source of truth when a piece of software has to deal with version numbers. It was build to take existing exceptions into account while enforcing new versions to comply with known schemes.
+Hence, `mozilla-version` is an attempt to become the source of truth when a piece of software has to deal with version numbers. It was built to take existing exceptions into account while enforcing new versions to comply with known schemes.
 
 ## Documentation
 
@@ -23,11 +23,10 @@ Just install it from pip:
 pip install mozilla-version
 ```
 
-
 ## Hack on the code
 ```sh
-virtualenv venv         # create the virtualenv in ./venv
-. venv/bin/activate    # activate it
+virtualenv venv       # create the virtualenv in ./venv
+. venv/bin/activate   # activate it
 git clone https://github.com/mozilla-releng/mozilla-version
 cd mozilla-version
 pip install --require-hashes -r requirements/local.txt
@@ -107,7 +106,7 @@ Run `maintenance/pin.sh`
 
 ### Versioning
 
-mozilla-version follows [semver](http://semver.org/).  Essentially, increment the
+`mozilla-version` follows [semver](http://semver.org/).  Essentially, increment the
 
 1. MAJOR version when you make incompatible API changes,
 2. MINOR version when you add API functionality in a backwards-compatible manner, and
@@ -115,22 +114,22 @@ mozilla-version follows [semver](http://semver.org/).  Essentially, increment th
 
 ### Release files
 
-[Update the changelog](http://keepachangelog.com/) and version.txt to the new version before making a new release.
+[Update the changelog](http://keepachangelog.com/) and `version.txt` to the new version before making a new release.
 
-If you add change the list of files that need to be packaged (either adding new files, or removing previous packaged files), modify `MANIFEST.in`.
+If you change the list of files that need to be packaged (either adding new files, or removing previous packaged files), modify `MANIFEST.in`.
 
 ### Tagging
 
-To enable gpg signing in git,
+To enable GPG signing in git,
 
-1. you need a [gpg keypair](https://wiki.mozilla.org/Security/Guidelines/Key_Management#PGP.2FGnuPG)
+1. you need a [GPG keypair](https://wiki.mozilla.org/Security/Guidelines/Key_Management#PGP.2FGnuPG)
 2. you need to set your [`user.signingkey`](https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work#GPG-Introduction) in your `~/.gitconfig` or `scriptworker/.git/config`
 3. If you want to specify a specific gpg executable, specify your `gpg.program` in your `~/.gitconfig` or `scriptworker/.git/config`
 
 Checkout the current master branch, tag and sign!
 
 ```bash
-    # make sure you've committed your changes first!
+    # Make sure you've committed your changes first!
     VERSION=<version>
     git tag -s $VERSION -m"$VERSION"
 ```
@@ -138,14 +137,14 @@ Checkout the current master branch, tag and sign!
 Push!
 
 ```bash
-    # By default this will push the new tag to origin; make sure the tag gets pushed to
-    # mozilla-releng/mozilla-version
+    # By default this will push the new tag to origin; make sure the tag gets pushed
+    # to mozilla-releng/mozilla-version
     git push --tags
 ```
 
-### Pypi packages
+### PyPI packages
 
-Someone with access to the mozilla-version package on `pypi.python.org` needs to do the following (twine and wheel packages are installed):
+Someone with access to the `mozilla-version` package on `pypi.org` needs to do the following (twine and wheel packages are installed):
 
 ```bash
     # from https://packaging.python.org/tutorials/distributing-packages/#uploading-your-project-to-pypi
